@@ -110,10 +110,85 @@ void task3(){
     printf("\n");
 }
 
+void task4(){
+
+    printf("Aufgabe 4\n\n");
+
+    //4 a) - Variable definieren
+    int array[5][7];
+    int counter = 1;
+
+    //4 b) - Zahlen in Array schreiben
+    for(int i = 1; i <= 5; i++){
+        for(int j = 1; j <= 7; j++){
+            array[i-1][j-1] = counter++;
+        }
+    }
+
+    printf("\n4 c) - Array ausgeben\n\n");
+
+    //4 c) - Array ausgeben
+    for(int i = 1; i <= 5; i++){
+        for(int j = 1; j <= 7; j++){
+            printf("%d\t",array[i-1][j-1]);
+        }
+        printf("\n");
+    }
+
+    printf("\n4 d) - Array Spaltenweise ausgeben\n\n");
+
+    //4 d) - Array Spaltenweise ausgeben
+    for(int i = 0; i < 7; i++){
+        for(int j = 0; j < 5; j++){
+            printf("%d\t", array[j][i]);
+        }
+        printf("\n");
+    }
+
+    printf("\n4 e) - Array ruechwaerts ausgeben\n\n");
+
+    //4 e) - Array rückwärts ausgeben
+    for(int i = 5; i > 0; i--){
+        for(int j = 7; j > 0; j--){
+            printf("%d\t", array[i-1][j-1]);
+        }
+        printf("\n");
+    }
+
+    printf("\n4 f) - Zeilensummen berechnen und ausgeben\n\n");
+
+    //4 f) - Zeilensummen berechnen und ausgeben
+    int rowSums[5];
+    for(int i = 0; i < 5; i++){
+        rowSums[i] = 0;
+        for(int j = 0; j < 7; j++){
+            rowSums[i] = rowSums[i] + array[i][j];
+        }
+        printf("%d\t", rowSums[i]);
+    }
+
+    printf("\n\n4 g) - Spaltensummen berechnen und ausgeben\n\n");
+
+    //4 f) - Spaltensummen berechnen und ausgeben\n\n
+    int colSums[7];
+    for(int i = 0; i < 7; i++){
+        colSums[i] = 0;
+        for(int j = 0; j < 5; j++){
+            colSums[i] = colSums[i] + array[j][i];
+        }
+        printf("%d\t", colSums[i]);
+    }
+
+    printf("\n\n");
+
+
+}
+
 int main()
 {
     task2();
     task3();
+    task4();
 
     return 0;
 }
