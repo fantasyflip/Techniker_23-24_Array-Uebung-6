@@ -197,70 +197,27 @@ void task5(){
     while(winner == -1){
         printf("Spieler %d ist am Zug.", currentPlayer);
 
-        int validX;
+        int validCoords;
         do {
-            validX = 1;
-            printf("\n\nBitte geben Sie die X-Koordinate ihres Zuges ein.\n\n");
+            validCoords = 1;
 
-            scanf("%d", &coords[0]);
+            printf("\n\n Bitte geben Sie die X und Y-Koordinate durch ein Leerzeichen getrennt ein.\n\n");
 
-            if(coords[0] > 3 || coords[0] < 0){
+            scanf("%d %d", &coords[0], &coords[1]);
+
+            if(coords[0] > 3 || coords[0] < 0 || coords[1] > 3 || coords[1] < 0){
                 printf("\nIhre Eingabe ist ungueltig. Bitte versuchen Sie es erneut. Der Wert muss 1, 2 oder 3 sein.\n");
-                validX = 0;
-            }
-
-            int hasFreeXSpot = 0;
-
-            for(int i = 0; i < 3; i++){
-                if(field[coords[0]-1][i] == 0){
-                    hasFreeXSpot = 1;
-                    i = 3;
-                }
-            }
-
-            if(hasFreeXSpot != 1){
-                printf("\nIn dieser Spalte gibt es keinen freien Platz mehr. Wählen Sie einen anderen Wert.\n");
-                validX = 0;
-            }
-
-
-        } while(validX != 1);
-
-        printf("\nDie gewaehlte X-Koordinate ist: %d\n\n", coords[0]);
-
-        int validY;
-        do {
-            validY = 1;
-            printf("\n\nBitte geben Sie die Y-Koordinate ihres Zuges ein.\n\n");
-
-            scanf("%d", &coords[1]);
-
-            if(coords[1] > 3 || coords[1] < 0){
-                printf("\nIhre Eingabe ist ungueltig. Bitte versuchen Sie es erneut. Der Wert muss 1, 2 oder 3 sein.\n");
-                validY = 0;
-            }
-
-            int hasFreeYSpot = 0;
-
-            for(int i = 0; i < 3; i++){
-                if(field[i][coords[1]] == 0){
-                    hasFreeYSpot = 1;
-                    i = 3;
-                }
-            }
-
-            if(hasFreeYSpot != 1){
-                validY = 0;
+                validCoords = 0;
             }
 
             if(field[coords[1]-1][coords[0]-1] != 0){
-                printf("\nDieses Feld ist bereits belegt. Bitte verwenden Sie einen anderen Y-Wert.");
-                validY = 0;
+                printf("\nDieses Feld ist bereits belegt. Bitte verwenden Sie andere Werte.");
+                validCoords = 0;
             }
 
-        } while(validY != 1);
+        } while(validCoords != 1);
 
-        printf("\nDie gewaehlte Y-Koordinate ist: %d\n\nSpieler %d setzt eine Markierung auf %d/%d\n\nDas Spielfeld sieht nun wie folgt aus:\n\n", coords[1],currentPlayer,coords[0],coords[1]);
+        printf("\nSpieler %d setzt eine Markierung auf %d/%d\n\nDas Spielfeld sieht nun wie folgt aus:\n\n", currentPlayer,coords[0],coords[1]);
 
 
         field[coords[1]-1][coords[0]-1] = currentPlayer;
