@@ -351,20 +351,13 @@ void task5(){
             printf("\nDas Spiel ist vorbei. Spieler %d hat durch eine Diagonale Linie von oben links nach unten rechts gewonnen!\n", winner);
         }
 
-        diagonalCounter = 0;
 
-        for(int i = 2; i > -1; i--){
-            for(int j = 0; j < 3; j++){
-                if(field[i][j] == currentPlayer){
-                    diagonalCounter++;
-                }
-            }
-        }
-
-        if(diagonalCounter == 3){
+        //top right - bottom left
+        if(field[2][0] == currentPlayer && field[1][1] == currentPlayer && field[0][2] == currentPlayer){
             winner = currentPlayer;
             printf("\nDas Spiel ist vorbei. Spieler %d hat durch eine Diagonale Linie von oben rechts nach unten links gewonnen!\n", winner);
         }
+
 
         if(currentPlayer == 1){
             currentPlayer = 2;
