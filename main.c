@@ -1,6 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdlib.h>
+
+void clrscr()
+{
+    system("@cls||clear");
+}
 
 void task2(){
 
@@ -182,11 +188,48 @@ void task4(){
     printf("\n\n");
 }
 
+void printField(int array[3][3]){
+    for(int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            if(array[i][j] == 1){
+                printf(" O ");
+            } else if (array[i][j] == 2){
+                printf(" X ");
+            } else {
+                printf("   ");
+            }
+            if(j < 2){
+                printf("|");
+            }
+        }
+        if(i < 2){
+            printf("\n-----------\n");
+        } else {
+            printf("\n");
+        }
+
+    }
+}
+
+void printHeader(int field[3][3], int currentPlayer){
+    clrscr();
+
+    printf("Willkommen bei Tic Tac Toe\n\nSpieler 1:\tO\nSpieler 2:\tX\n\n");
+    printf("\n--------------------------------------------------------\n\n");
+    printField(field);
+    printf("\n--------------------------------------------------------\n");
+    printf("Spieler %d ist am Zug.", currentPlayer);
+}
+
 void task5(){
 
     printf("Aufgabe 5: Tic Tac Toe\n\n");
 
-    printf("Willkommen bei Tic Tac Toe\n\nSpieler 1:\tO\nSpieler 2:\tX\n\n");
+    printf("Druecken Sie eine beliebige Taste um zu starten...");
+
+    getchar();
+
+
 
     int currentPlayer = 1;
     int winner = -1;
@@ -195,53 +238,45 @@ void task5(){
     int playerTurn[2]={0,0};
 
     while(winner == -1){
-        printf("Spieler %d ist am Zug.", currentPlayer);
 
-        int validCoords;
+
+        int validCoords = 0;
         do {
+
+            printHeader(field, currentPlayer);
+
+
+
+            if(validCoords == 2){
+               printf("\n\nIhre Eingabe ist ungueltig. Bitte versuchen Sie es erneut. Der Wert muss 1, 2 oder 3 sein.\n\n");
+            } else if (validCoords == 3){
+               printf("\n\nDieses Feld ist bereits belegt. Bitte verwenden Sie andere Werte.\n\n");
+            } else {
+               printf("\n\nBitte geben Sie die X und Y-Koordinate durch ein Leerzeichen getrennt ein.\n\n");
+            }
+
             validCoords = 1;
 
-            printf("\n\n Bitte geben Sie die X und Y-Koordinate durch ein Leerzeichen getrennt ein.\n\n");
 
             scanf("%d %d", &coords[0], &coords[1]);
 
             if(coords[0] > 3 || coords[0] < 0 || coords[1] > 3 || coords[1] < 0){
-                printf("\nIhre Eingabe ist ungueltig. Bitte versuchen Sie es erneut. Der Wert muss 1, 2 oder 3 sein.\n");
-                validCoords = 0;
+                validCoords = 2;
             }
 
             if(field[coords[1]-1][coords[0]-1] != 0){
-                printf("\nDieses Feld ist bereits belegt. Bitte verwenden Sie andere Werte.");
-                validCoords = 0;
+                validCoords = 3;
             }
 
         } while(validCoords != 1);
+
 
         printf("\nSpieler %d setzt eine Markierung auf %d/%d\n\nDas Spielfeld sieht nun wie folgt aus:\n\n", currentPlayer,coords[0],coords[1]);
 
 
         field[coords[1]-1][coords[0]-1] = currentPlayer;
 
-        for(int i = 0; i < 3; i++){
-            for(int j = 0; j < 3; j++){
-                if(field[i][j] == 1){
-                    printf(" O ");
-                } else if (field[i][j] == 2){
-                    printf(" X ");
-                } else {
-                    printf("   ");
-                }
-                if(j < 2){
-                    printf("|");
-                }
-            }
-            if(i < 2){
-                printf("\n-----------\n");
-            } else {
-                printf("\n");
-            }
-
-        }
+        printField(field);
 
 
         playerTurn[currentPlayer-1]++;
